@@ -8,7 +8,7 @@ mut already_posted = try { open posted.txt | lines -s } catch { [] }
 let new_posts = ^gallery-dl --no-input --no-download -o extractor.tiktok.tiktok-range=1-15 -j $"($SOURCE)/posts"
     | from json
     | each { |e| $e | last }
-    | sort-by -r date
+    | sort-by date
     | uniq-by id
     | where id not-in $already_posted
 
