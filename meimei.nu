@@ -9,6 +9,7 @@ let new_posts = ^gallery-dl --no-input --no-download -o extractor.tiktok.tiktok-
     | from json
     | each { |e| $e | last }
     | sort-by -r date
+    | uniq-by id
     | where id not-in $already_posted
 
 for post in $new_posts {
